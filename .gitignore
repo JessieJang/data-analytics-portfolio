@@ -1,0 +1,9 @@
+# 데이터베이스 (바이너리, 재생성 가능하므로 제외)
+*.db
+
+# OS가 자동 생성하는 잡파일
+.DS_Store
+Thumbs.db
+
+# VS Code 개인 설정
+.vscode/
