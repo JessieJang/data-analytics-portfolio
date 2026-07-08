@@ -14,7 +14,14 @@ SQL / Excel / Python / Power BI
 
 ## Data Cleaning
 
-TBD
+- **duration** excluded — data leakage (only known after the call; 
+  predictive but not actionable for targeting).
+- **poutcome** unknowns (81.75%) kept — represent new clients with no 
+  prior contact, not missing data. Dropping them would remove most of 
+  the dataset.
+- **contact** excluded from targeting — cellular (14.9%) and telephone 
+  (13.4%) convert almost identically; unknown (4.1%) likely reflects 
+  early data gaps, not the channel.
 
 ## Analysis
 

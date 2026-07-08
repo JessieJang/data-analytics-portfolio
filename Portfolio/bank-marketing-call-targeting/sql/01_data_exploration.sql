@@ -7,3 +7,4 @@ SELECT ROUND(((SELECT COUNT(*) FROM bank WHERE y='yes')*100.0)/
 
 -- 3. Distribution of clients by job type
 SELECT job, COUNT(*) FROM bank GROUP BY job;
+
