@@ -34,6 +34,24 @@ FROM bank
 GROUP BY age_range
 ORDER BY conversion_rate DESC;
 
+-- Tier sizing: conversion by age among NEW clients only (poutcome='unknown').
+-- Used to size the call list for Tiers 2-3. Rates differ from the all-client
+-- view above (60+ = 27.4% here vs 33.6% overall) because prior-success clients
+-- are excluded.
+SELECT  CASE WHEN age < 30 THEN '~30'
+			WHEN 30 <= age AND age < 40 THEN '30~40'
+			WHEN 40 <= age AND age <50 THEN '40~50'
+			WHEN 50 <= age AND age <60 THEN '50~60'
+			ELSE '60+' 
+			END AS age_range
+			,COUNT(*) AS total,
+			SUM(CASE WHEN y='yes' THEN 1 ELSE 0 END) AS yes_count,
+			ROUND((SUM(CASE WHEN y='yes' THEN 1 ELSE 0 END)*100.0)/COUNT(*),2) AS conversion_rate
+FROM bank
+WHERE poutcome= 'unknown'
+GROUP BY age_range
+ORDER BY conversion_rate DESC;
+
 -- Conversion by contact attempts: holds near baseline through 3 calls,
 -- then drops sharply (4th = 9.0%, 8+ = 4.9%). Supports a 3-attempt cap.
 SELECT CASE WHEN campaign <= 7 THEN CAST(campaign AS TEXT)
