@@ -57,11 +57,13 @@ subscriptions measure volume. The two do not rank segments the same way.*
 Clients who subscribed in a previous campaign convert at **64.7%** — 5.5× the
 baseline. At only 1,511 clients (3.3% of the base), this segment is small but
 delivers the highest return per call.
+![Conversion by prior campaign outcome](images/conversion_by_prior_outcome.png)
 
 ### Conversion follows a U-shape across age
 **Hypothesis:** Life-cycle theory suggests both ends of the age range favour
 term deposits — retirees become risk-averse once income stops, while clients
 under 30 save toward shorter-term goals.
+![Conversion by age group](images/conversion_by_age.png)
 
 Clients under 30 (17.6%) and over 60 (**33.6%**) both convert well above
 baseline, while ages 40–50 bottom out at 9.1%. Splitting the 50+ bracket
@@ -91,6 +93,7 @@ haven't converted after several attempts are unlikely to convert at all.
 The first three calls hold near baseline (14.6% / 11.2% / 11.2%), but the fourth
 drops to 9.0% and continues falling to 4.9% beyond eight attempts. The 9,641 clients 
 contacted more than three times yielded only 7.4% conversion.
+![Conversion by contact attempts](images/conversion_by_attempts.png)
 
 ## Key Insights
 
@@ -172,8 +175,38 @@ campaign outcome. Total subscriptions still depend on how many clients the team
 contacts — tiering changes whom they reach first, not whether the remaining base
 converts.*
 
-<!-- ## Visualizations -->
-<!-- ## Limitations & Next Steps -->
+## Limitations & Next Steps
+
+**The data is 16 years old and from a different market.** Collected in Portugal
+between 2008 and 2010, immediately following the financial crisis. Retirement
+ages, interest rate environments, and banking behaviour have all shifted since —
+and the European retail banking system differs structurally from North America's.
+These findings should be treated as a method, not a transferable conclusion.
+
+**Correlation, not causation.** The life-cycle hypothesis explains the age
+pattern, but competing explanations exist. Outbound calls are placed during
+business hours — retirees are simply more available to answer than working-age
+clients. The 60+ effect may partly reflect *reachability*, not *preference*.
+Distinguishing the two would require call-attempt and answer-rate data.
+
+**Contact-level outcomes are unavailable.** The `campaign` column records how
+many times a client was contacted, but not which call produced the conversion.
+A client with `campaign = 3` may have subscribed on the first attempt. This
+makes the three-attempt cap impossible to simulate precisely — the recommendation
+rests on the observed decline in conversion, not on a modelled outcome.
+
+**Age is a proxy, not a mechanism.** Employment status, income stability, and
+existing product holdings would likely explain conversion better than age
+brackets alone. This dataset does not capture them.
+
+### Next Steps
+
+- **Validate the tiering strategy with a controlled test.** Split the call list
+  and compare tiered outreach against the current untargeted approach.
+- **Model conversion probability per client** rather than per segment, using the
+  full attribute set (job, education, housing, loan) instead of three variables.
+- **Build an interactive dashboard** so the call center can filter segments and
+  rebuild lists without an analyst in the loop.
 
 ## How to Reproduce
 
