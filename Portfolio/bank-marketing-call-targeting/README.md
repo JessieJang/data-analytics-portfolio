@@ -6,7 +6,7 @@
 A retail bank runs outbound phone campaigns to sell term deposits. Call center
 capacity is finite — every call spent on an unlikely buyer is a call not spent
 on a likely one. Contacting the full client base converts at just **11.7%**,
-meaning roughly 9 in 10 calls end without a sale.
+meaning roughly 9 in 10 clients contacted do not subscribe.
 
 This project identifies which client segments a call center should prioritize,
 and when it should stop calling, to lift conversion above that baseline without
@@ -15,8 +15,9 @@ increasing headcount.
 ## Dataset
 
 [UCI Bank Marketing Dataset](https://archive.ics.uci.edu/dataset/222/bank+marketing) —
-45,211 phone calls made by a Portuguese retail bank between 2008 and 2010.
-- **Grain:** one row = one call to one client
+45,211 clients contacted by a Portuguese retail bank between 2008 and 2010.
+- **Grain:** one row = one client in this campaign
+- **Contacts:** the `campaign` column records how many calls that client received
 - **Target:** `y` — did the client subscribe to a term deposit?
 
 ## Tools
@@ -36,7 +37,7 @@ increasing headcount.
   early data gaps, not the channel.
 
 ## Analysis
-**Baseline conversion rate: 11.7%** (5,289 subscriptions out of 45,211 calls).
+**Baseline conversion rate: 11.7%** (5,289 subscriptions out of 45,211 clients).
 Every segment below is measured against this benchmark.
 
 | Segment | Clients | Subscriptions | Conversion | vs. baseline |
@@ -88,8 +89,8 @@ This confirms the 60+ effect is independent of prior campaign history.
 haven't converted after several attempts are unlikely to convert at all.
 
 The first three calls hold near baseline (14.6% / 11.2% / 11.2%), but the fourth
-drops to 9.0% and continues falling to 4.9% beyond eight attempts. The 9,641 calls
-made after the third attempt yielded only 7.4% conversion.
+drops to 9.0% and continues falling to 4.9% beyond eight attempts. The 9,641 clients 
+contacted more than three times yielded only 7.4% conversion.
 
 ## Key Insights
 
@@ -154,7 +155,22 @@ not the driver.
 
 ## Impact
 
-TBD
+Working the three priority tiers first reaches **7,051 clients — 15.6% of the
+base — and captures 1,941 subscriptions, or 36.7% of all conversions.**
+
+| | Clients | Calls | Subscriptions | Per client | Per call |
+|---|---|---|---|---|---|
+| Untargeted (full base) | 45,211 | 124,956 | 5,289 | 11.7% | 4.2% |
+| Tiers 1–3 only | 7,051 | 16,911 | 1,941 | **27.5%** | **11.5%** |
+
+Measured per client, tiering lifts conversion **2.4×**. Measured per call — the
+metric that actually maps to call center capacity — the lift is **2.7×**, since
+priority-tier clients also require fewer contacts on average (2.4 calls vs 2.8).
+
+*Note: this measures the efficiency of the targeting order, not a projected
+campaign outcome. Total subscriptions still depend on how many clients the team
+contacts — tiering changes whom they reach first, not whether the remaining base
+converts.*
 
 <!-- ## Visualizations -->
 <!-- ## Limitations & Next Steps -->
